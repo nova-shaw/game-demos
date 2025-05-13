@@ -1,4 +1,6 @@
 
+@import url('./display.css');
+
 @font-face {
   font-family: 'Nunito';
   src: url('../fonts/Nunito-vf-wght.ttf') format('truetype');
@@ -92,7 +94,8 @@ body {
 }
 
 /* For 'Rotate Stop' and 'Flip find' */
-.anim-stagger .sides {
+.reveal .card .sides {
+/* .anim-stagger .sides { */
   transition-delay: calc(var(--anim-delay) * 100ms);
 }
 

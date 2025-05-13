@@ -43,6 +43,7 @@ checkDisplayIsOpen();
 async function openDisplayWindow() {
   if (!displayIsOpen){
     return await popWindow('display.html', 'nto_display'); // Returns reference to popped window
+    // return await popWindow('./flip-find/index.html', 'nto_display'); // Returns reference to popped window
   }
 }
 
@@ -102,9 +103,10 @@ bgButtons.forEach( b => { b.addEventListener('click', changeDisplayBackground) }
 
 
 function changeDisplayBackground(e) {
-  const backgroundName = e.currentTarget.dataset.background;
+  // const backgroundName = e.currentTarget.dataset.background;
+
   // messageBus.postMessage({ key: 'changeBackground', val: backgroundName });
-  messageBus.postMessage({
+  /*messageBus.postMessage({
     type: 'display',
     value: {
       type: 'background',
@@ -112,6 +114,20 @@ function changeDisplayBackground(e) {
         name: backgroundName,
         colors: ['#000', '#999']
       }
+    }
+  });*/
+  const bgArray = e.currentTarget.dataset.background.split('|');
+  const backgroundName   = bgArray[0] || '';
+  const backgroundColor1 = bgArray[1] || '7db6e7';
+  const backgroundColor2 = bgArray[2] || '79d2f2';
+  // log(bgArray);
+
+  messageBus.postMessage({
+    type: 'background',
+    value: {
+      name: backgroundName,
+      // colors: ['#000', '#999']
+      colors: [`#${backgroundColor1}`, `#${backgroundColor2}`]
     }
   });
 }

@@ -2,7 +2,7 @@
 import { uiElement } from './_common/js/ui-element.js';
 import { saveWindowCoords, messageBusStart } from './_common/js/window.js';
 import * as cursor from './_common/js/cursor.js';
-import { addKeys } from './_common/js/keypress.js';
+import * as keypress from './_common/js/keypress.js';
 
 const log = console.log, dir = console.dir;
 
@@ -86,7 +86,7 @@ window.addEventListener('pointercancel', cursor.pointerOut);
 //////////////////////////////////////////////////
 // Keypress events
 
-addKeys({
+keypress.addKeys({
   'KeyC': cursor.cycleCursorImage,
   'KeyV': cursor.cycleCursorColor,
   'KeyM': cursor.mirrorCursor,
@@ -107,13 +107,14 @@ messageBus.addEventListener('message', (event) => {
   switch (msg.type) { // Only 3 types of incoming msg from Resource window
     case 'confirm': confirmDisplayOpen(); break;
     case 'display': displayMedia(msg.value); break;
+    case 'background': changeBackground(msg.value); break;
     case 'control': controlDispatch(msg.value); break;
   }
 });
 
 
 //////////////////////////////////////////////////
-// Tell Resource window that Display is open
+// Tell parent (Resource) window that Display is open
 
 function confirmDisplayOpen() {
   messageBus.postMessage({ type: 'open', value: true });
@@ -158,7 +159,7 @@ let activePlayer = null; // active playable node (can only be one)
 
 function displayMedia(msg) {
 
-  log(msg);
+  log('displayMedia', msg);
 
   document.body.classList.add('loading');
 
@@ -174,13 +175,14 @@ function displayMedia(msg) {
   // Multiple types are needed so iterate through all, loading each
   for (const [type, value] of Object.entries(msg)) {
 
-    log(type);
+    log('type/value', type, value);
 
     switch (type) {
       case 'image': loadImage(value);   break;
       case 'audio': loadAudio(value);   break;
       case 'video': loadVideo(value);   break;
       case 'layout': buildLayout(value); break;
+      // case 'background': changeBackground(value); break;
       // default: log('TYPE: everything else', type); break;
     }
 
@@ -236,9 +238,11 @@ function buildLayout(data) {
 
 
 function changeBackground(data) {
-  // log('changeBackground', data);
+  log('changeBackground', data);
   document.body.dataset.background = data.name;
   if (data.name != '') patternDisplay.setAttribute('fill', `url(#pattern-${data.name})`);
+  if (data.colors[0] != '') document.body.style.setProperty('--pattern-color1', data.colors[0]);
+  if (data.colors[1] != '') document.body.style.setProperty('--pattern-color2', data.colors[1]);
 }
 
 

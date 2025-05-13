@@ -142,6 +142,10 @@ button {
   cursor: pointer;
 }
 
+button[disabled] {
+  cursor: default;
+}
+
 .btn {
   background: #fff;
   border-radius: 0.25em;

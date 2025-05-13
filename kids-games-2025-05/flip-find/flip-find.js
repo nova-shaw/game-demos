@@ -40,7 +40,7 @@ const speed = { min: 80, max: 1000}; // DOM slider is normalised value (ie 0-1 f
 
 function cardClick(e) {
   timer.cancel();
-  deck.classList.remove('anim-stagger');
+  document.body.classList.remove('reveal');
 
   const card = e.currentTarget;
   const shown = card.classList.toggle('show');
@@ -109,8 +109,8 @@ function chooseNext() {
   // Remove focus from last focused card
   if (index != null) deck.children[index].classList.remove('focus');
 
-  // index = choose.random();
-  index = choose.next();
+  index = choose.random();
+  // index = choose.next();
   // index = choose.nextReverse();
 
   // Add focus style to element at chosen index
@@ -124,14 +124,14 @@ function chooseNext() {
 
 const btnPlay = document.querySelector('#btn-play');
 btnPlay.addEventListener('click', e => {
-  deck.classList.remove('anim-stagger');
+  document.body.classList.remove('reveal');
   timer.toggle();
 });
 
 
 const btnCancel = document.querySelector('#btn-cancel');
 btnCancel.addEventListener('click', e => {
-  deck.classList.remove('anim-stagger');
+  document.body.classList.remove('reveal');
   timer.cancel();
 });
 
@@ -145,7 +145,7 @@ btnReset.addEventListener('click', e => {
 
   // Show all cards with time stagger
   log(deck);
-  deck.classList.add('anim-stagger');
+  document.body.classList.add('reveal');
   deck.querySelectorAll('.card').forEach( child => {
     child.classList.remove('show');
   });
@@ -161,7 +161,7 @@ btnReveal.addEventListener('click', e => {
   timer.cancel();
 
   // Hide all cards with time stagger
-  deck.classList.add('anim-stagger');
+  document.body.classList.add('reveal');
   deck.querySelectorAll('.card').forEach( child => {
     child.classList.add('show');
   });

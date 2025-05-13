@@ -11,27 +11,23 @@ body {
   /* allow dragging on touch screen without pull-down-to-refreshing */ 
   touch-action: none;
 
-  /* Thanks for propotional font sizing: https://stackoverflow.com/a/68706388 */
-  /* font-size: min(1vw, 1.778vh); */
-  /* --aspect: calc(4 / 3 * 1vh); */
-  /* --aspect: calc(16 / 9 * 1vh); */
-  /* font-size: min(1vw, var(--aspect)); */
-  
+  /**
+   * Aspect ratio & element sizing
+   * 
+   * These are set separately as the 2 diffent calculations are used for different pusposes:
+   * --aspect-normal: for font/element sizing
+   * --aspect-invert: for #aspect-guide element
+   * 
+   * Thanks for propotional font sizing idea: https://stackoverflow.com/a/68706388
+   *  */
+
   --aspect-w: 16;
   --aspect-h: 9;
+
   --aspect-normal: calc( var(--aspect-w) / var(--aspect-h) );
   --aspect-invert: calc( var(--aspect-h) / var(--aspect-w) );
-
-  /* --aspect: calc(9 / 16); */
-  /* --aspect-b: calc(16 / 9); */
+  
   font-size: min(2vw, calc( var(--aspect-normal) * 2vh) );
-
-  /* font-size: calc( 3 * min(1vw, var(--aspect)) ); */
-
-  /* font-size: min(1vw, calc(16/9vh)); */
-  /* --div: calc(16vh / 9vh); */
-  /* font-size: min(1vw, var(--div)); */
-
 }
 
 /*///////////////////////////////////////////////////////////*/
@@ -66,6 +62,14 @@ body {
   display: block;
 } */
 
+
+main {
+  width: 100%;
+}
+
+#deck {
+  width: 100%;
+}
 
 /*//////////////////////////////////////////////////////////////////////////////*/
 /*//////////////////////////////////////////////////////////////////////////////*/
@@ -106,7 +110,7 @@ body {
 
 #background-logo {
   width: 50%;
-  width: 32em;
+  width: 26em;
   height: auto;
   /* display: none; */
   color: var(--pattern-color2);

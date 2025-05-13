@@ -1,8 +1,8 @@
-import { buildDeck }   from '../_common/modules/card-builder.js';
-import { Timer }       from '../_common/modules/timer.js';
-import * as choose     from '../_common/modules/choose.js';
-import { easeOutQuad } from '../_common/modules/utils.js';
-import * as fetcher    from '../_common/modules/fetcher.js';
+import { buildDeck }   from '../_common/js/card-builder.js';
+import { Timer }       from '../_common/js/timer.js';
+import * as choose     from '../_common/js/choose.js';
+import { easeOutQuad } from '../_common/js/utils.js';
+import * as fetcher    from '../_common/js/fetcher.js';
 
 const log = console.log;
 
@@ -20,7 +20,7 @@ let deck;
 let cardList;
 
 (async () => {
-  lessonData = await fetcher.all(['../_lessons/kids_5b07.json']);
+  lessonData = await fetcher.all(['../_data/lessons/kids_5b07.json']);
   deck = await buildDeck(lessonData[0], cardClick, 'stripes'); // Patterns: dots | stripes | check | zigzag
   display.appendChild(deck);
   cardList = [...deck.children];
@@ -41,7 +41,7 @@ const speed = { min: 400, max: 1200}; // DOM slider is normalised value (ie 0-1 
 
 function cardClick(e) {
   timer.cancel();
-  deck.classList.remove('anim-stagger');
+  document.body.classList.remove('reveal');
 
   const card = e.currentTarget;
   const shown = card.classList.toggle('show');
@@ -97,7 +97,7 @@ function hideAll() {
 
 const btnPlay = document.querySelector('#btn-play');
 btnPlay.addEventListener('click', e => {
-  deck.classList.remove('anim-stagger');
+  document.body.classList.remove('reveal');
   timer.toggle(0);
 });
 
@@ -110,7 +110,7 @@ btnReset.addEventListener('click', e => {
   choose.setup(cardList.length);
 
   // Show all cards with time stagger
-  deck.classList.add('anim-stagger');
+  document.body.classList.add('reveal');
   deck.querySelectorAll('.card').forEach( child => {
     child.classList.remove('show');
   });
@@ -126,7 +126,7 @@ btnReveal.addEventListener('click', e => {
   timer.cancel();
 
   // Hide all cards with time stagger
-  deck.classList.add('anim-stagger');
+  document.body.classList.add('reveal');
   deck.querySelectorAll('.card').forEach( child => {
     child.classList.add('show');
   });

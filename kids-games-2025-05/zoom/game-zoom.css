@@ -216,8 +216,8 @@ main {
   width: 100vw;
   height: 100dvh;
   z-index: 0;
-  --pattern-color1: #b3e9ff;
-  --pattern-color2: #ffff93;
+  --pattern-color1: #7ae7ff;
+  --pattern-color2: #ff93dd;
 }
 
 #pattern-background {

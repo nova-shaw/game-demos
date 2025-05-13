@@ -16,7 +16,7 @@ export const data = {
     { text: 'art',     slug: 'art',     poi: [37, 45] , image: 'art.svg' },
     { text: 'English', slug: 'english', poi: [42, 34] , image: 'english.svg' },
     { text: 'math',    slug: 'math',    poi: [68, 20] , image: 'math.svg' },
-    { text: 'music',   slug: 'music',   poi: [17, 68] , image: 'music.svg' },
+    { text: 'music',   slug: 'music',   poi: [17, 66] , image: 'music.svg' },
     { text: 'science', slug: 'science', poi: [20, 59] , image: 'science.svg' }
   ],
   listening: [

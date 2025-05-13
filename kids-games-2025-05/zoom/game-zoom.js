@@ -1,12 +1,14 @@
-import { lerp, easeInQuart } from '../_common/modules/utils.js';
-import { uiElement } from '../_common/modules/ui-element.js';
-import * as anim from '../_common/modules/anim.js';
-import * as lessonData from '../_lessons/class5_bookb_07.js';
+import { lerp, easeInQuart } from '../_common/js/utils.js';
+import { uiElement } from '../_common/js/ui-element.js';
+import * as anim from '../_common/js/anim.js';
+import * as lessonData from '../_data/lessons/class5_bookb_07.js';
+
+import { Timeline } from '../_common/js/timeline.js';
 
 const log = console.log;
 
 const lessonid = 'class5_bookb_07';
-const mediaPath = `../_lessons/${lessonid}/`;
+const mediaPath = `../_data/lessons/${lessonid}/`;
 
 
 
