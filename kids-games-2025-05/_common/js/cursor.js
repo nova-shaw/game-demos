@@ -49,7 +49,7 @@ export function cycleCursorImage() {
   cursorImageIndex = (cursorImageIndex >= cursorList.length-1) ? 0 : ++cursorImageIndex;
   // log(cursorImageIndex, cursorList[cursorImageIndex]);
   // cursorImage.setAttribute('xlink:href', `#${cursorList[cursorImageIndex]}`);
-  cursorImage.setAttribute('href', `assets/cursors.svg#${cursorList[cursorImageIndex]}`);
+  cursorImage.setAttribute('href', `./_common/assets/cursors.svg#${cursorList[cursorImageIndex]}`);
 }
 
 

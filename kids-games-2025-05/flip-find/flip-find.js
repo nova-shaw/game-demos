@@ -1,8 +1,8 @@
-import { buildDeck }   from '../_common/modules/card-builder.js';
-import { Timer }       from '../_common/modules/timer.js';
-import * as choose     from '../_common/modules/choose.js';
-import { easeOutQuad } from '../_common/modules/utils.js';
-import * as fetcher    from '../_common/modules/fetcher.js';
+import { buildDeck }   from '../_common/js/card-builder.js';
+import { Timer }       from '../_common/js/timer.js';
+import * as choose     from '../_common/js/choose.js';
+import { easeOutQuad } from '../_common/js/utils.js';
+import * as fetcher    from '../_common/js/fetcher.js';
 
 const log = console.log;
 
@@ -20,7 +20,7 @@ let deck;
 let cardList;
 
 (async () => {
-  lessonData = await fetcher.all(['../_lessons/kids_5b07.json']);
+  lessonData = await fetcher.all(['../_data/lessons/kids_5b07.json']);
   deck = await buildDeck(lessonData[0], cardClick, 'check'); // Patterns: dots | stripes | check | zigzag
   display.appendChild(deck);
   cardList = [...deck.children];

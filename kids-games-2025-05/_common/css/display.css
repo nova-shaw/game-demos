@@ -1,20 +1,43 @@
 
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+@import url('./base.css');
 
-main {
-  width: 100%;
+
+body {
+  background: #000;
+  --pattern-color1: #7db6e7;
+  --pattern-color2: #79d2f2;
+  overflow: hidden;
+
+  /* allow dragging on touch screen without pull-down-to-refreshing */ 
+  touch-action: none;
+
+  /* Thanks for propotional font sizing: https://stackoverflow.com/a/68706388 */
+  /* font-size: min(1vw, 1.778vh); */
+  /* --aspect: calc(4 / 3 * 1vh); */
+  /* --aspect: calc(16 / 9 * 1vh); */
+  /* font-size: min(1vw, var(--aspect)); */
+  
+  --aspect-w: 16;
+  --aspect-h: 9;
+  --aspect-normal: calc( var(--aspect-w) / var(--aspect-h) );
+  --aspect-invert: calc( var(--aspect-h) / var(--aspect-w) );
+
+  /* --aspect: calc(9 / 16); */
+  /* --aspect-b: calc(16 / 9); */
+  font-size: min(2vw, calc( var(--aspect-normal) * 2vh) );
+
+  /* font-size: calc( 3 * min(1vw, var(--aspect)) ); */
+
+  /* font-size: min(1vw, calc(16/9vh)); */
+  /* --div: calc(16vh / 9vh); */
+  /* font-size: min(1vw, var(--div)); */
+
 }
 
 /*///////////////////////////////////////////////////////////*/
 /* Controls */
 
-#controls {
+/* #controls {
   position: absolute;
   top: 0;
   right: 0;
@@ -41,6 +64,320 @@ main {
 }
 .running #btn-play .txt-reveal {
   display: block;
+} */
+
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////*/
+
+
+
+
+/*////////////////////////////////// SVG */
+
+
+#background {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  /* z-index: -1; */
+  background: var(--pattern-color1);
+}
+
+#svg-patterns {
+  color: var(--pattern-color2);
+}
+
+#background-logo {
+  width: 50%;
+  width: 32em;
+  height: auto;
+  /* display: none; */
+  color: var(--pattern-color2);
+}
+
+#background-pattern {
+  background: var(--pattern-color1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* display: none; */
+}
+
+#cursor.large  #cursor-svg {
+  scale: 1.75;
+}
+
+#cursor.mirror #cursor-svg {
+  transform: scale(-1, 1);
 }
 
 
+/*////////////////////////////////// Media Display elements */
+
+#display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background: #999; */
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.display-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fit: contain; */
+  object-fit: cover;
+  /* pointer-events: none; */
+  /* user-select: none; */
+  display: none;
+}
+
+body[data-display='image'] #image-node,
+body[data-display='audio+image'] #image-node,
+body[data-display='video'] #video-node,
+body[data-display='page'] #page-node {
+  display: block;
+}
+
+#image-node { background: #000; user-select: none; }
+#video-node { background: #000; }
+#audio-node { background: #000; }
+#build-node { background: #fff }
+
+
+/*////////////////////////////////// Background */
+
+body[data-background=""] svg#background-pattern {
+  display: none;
+}
+
+/* Hide all backgrounds if media being displayed */
+body[data-display] svg#background-default,
+body[data-display] svg#background-pattern {
+  display: none;
+}
+
+
+/*////////////////////////////////// Overlay? */
+
+#overlay {
+  /* background: #0004; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  /* pointer-events: none; */
+  font-size: 1rem;
+}
+
+/*////////////////////////////////// Custom Cursor */
+
+#cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+}
+
+#cursor-svg {
+  width: 5em; /* created at 80px square */
+  transform-origin: 4px 4px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.4));
+  translate: -4px -4px;
+}
+
+.hide-mouse {
+  cursor: none;
+}
+
+.show-cursor #cursor {
+  opacity: 1;
+}
+
+
+
+#cursor p {
+  margin: 0;
+  font-size: 2em;
+  position: absolute;
+  bottom: 95%;
+  left: -10%;
+  z-index: 1;
+  width: 10em;
+  display: none;
+}
+
+#cursor.text-mode p {
+  display: block;
+}
+
+#cursor p span#cursor-text {
+  pointer-events: all;
+  display: inline-block;
+  background: #fff;
+  color: inherit;
+  padding: 0.15em 0.25em;
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+#cursor p span#cursor-text:focus {
+  outline: none;
+}
+
+
+/*////////////////////////////////// Loader */
+
+/* Thanks https://codepen.io/supah/pen/BjYLdW */
+
+#loader {
+  width: 2em;
+  width: clamp(1em, 10%, 2em);
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  aspect-ratio: 1;
+/*  stroke-width: 3px;*/
+/*  color: #fff;*/
+  display: none;
+}
+
+.loading #loader {
+  display: block;
+}
+
+#loader-svg {
+  animation: rotate 1.3s linear infinite;
+  display: block;
+  overflow: visible;
+}
+
+#loader-svg-circle {
+  animation: dash 2s cubic-bezier(0.3, 0, 0.7, 1) infinite;
+  stroke-width: 6px;
+  stroke: #fff;
+}
+
+
+@keyframes dash {
+  0%   { stroke-dasharray: 1,  150; stroke-dashoffset: 0    }
+  50%  { stroke-dasharray: 90, 150; stroke-dashoffset: -35  }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124 }
+}
+
+
+
+/*////////////////////////////////// Click catcher */
+
+#clickcatcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* background: #0004; */
+  /* z-index: 100; */
+  pointer-events: all;
+}
+
+.droplet {
+  width: 1vw;
+  aspect-ratio: 1;
+  /* background: #000; */
+  border-radius: 50%;
+  position: absolute;
+  translate: -50% -50%;
+  box-shadow: 0 0 0 1px #fff;
+
+  animation:
+    scale 800ms linear,
+    fade 1000ms linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scale {
+  0%   { scale: 1 }
+  100% { scale: 6 }
+}
+
+@keyframes fade {
+  0% { opacity: 1 }
+  50% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+
+/*////////////////////////////////// Frame Guide */
+
+#aspect-guide {
+  color: #fff;
+  box-shadow: inset 0 0 0 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  
+  /* --aspect: 0.75; */ /* height/width = 3/4 or 4-by-3 aspect ratio */
+  /* --aspect: 0.5625; */ /* height/width = 9/16 or 16-by-9 aspect ratio */
+  width: 100vw;
+  max-width: calc(100vh / var(--aspect-invert));
+  height: 100vh;
+  max-height: calc(100vw * var(--aspect-invert));
+
+
+  --inset: 1em;
+  --corner: 2rem;
+
+  clip-path: polygon(
+    0 0,
+    var(--corner) 0, var(--corner) var(--inset), calc(100% - var(--corner)) var(--inset), calc(100% - var(--corner)) 0,
+    100% 0, 100% var(--corner), calc(100% - var(--inset)) var(--corner), calc(100% - var(--inset)) calc(100% - var(--corner)), 100% calc(100% - var(--corner)), 100% 100%,
+    calc(100% - var(--corner)) 100%, calc(100% - var(--corner)) calc(100% - var(--inset)), var(--corner) calc(100% - var(--inset)), var(--corner) 100%,
+    0 100%, 0 calc(100% - var(--corner)), var(--inset) calc(100% - var(--corner)), var(--inset) var(--corner), 0 var(--corner), 0 0
+  );
+
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+
+.show-aspect-guide #aspect-guide {
+  opacity: 1;
+  transition: none;
+}
