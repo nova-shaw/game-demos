@@ -23,6 +23,7 @@
 
 .compcard p {
   translate: 0 100vw;
+  font-size: 6vw;
 }
 
 .reveal .compcard img {
@@ -130,18 +131,74 @@ main {
   width: 100%;
 }
 
+
+
+
 #controls {
+  font-size: 1rem;
+  z-index: 100;
+
   position: absolute;
   top: 0;
   right: 0;
 
   background: #0003;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
   padding: 0.5em;
   gap: 0.5em;
 }
+
+
+#card-chooser {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+}
+
+.card-thumb {
+  background: #fff;
+  padding: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  cursor: pointer;
+  aspect-ratio: 1;
+  height: 6em;
+  overflow: hidden;
+  border-radius: 0.5em;
+}
+
+.card-thumb:hover {
+  outline: 0.5vw solid #000;
+}
+
+.card-thumb img {
+  width: 3em;
+  aspect-ratio: 1;
+}
+
+.card-thumb .text {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+}
+
+#control-buttons {
+  display: flex;
+  flex-direction: row;
+  flex: 100% 1 1;
+  gap: inherit;
+  user-select: none;
+}
+
 
 #btn-play {
   width: 5em;

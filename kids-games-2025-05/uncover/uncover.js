@@ -4,6 +4,10 @@ import * as choose from '../_common/js/choose.js';
 import { easeOutQuad } from '../_common/js/utils.js';
 import { uiElement } from '../_common/js/ui-element.js';
 
+import * as lessonData from '../_data/lessons/class5_bookb_07.js';
+const lessonid = 'class5_bookb_07';
+const mediaPath = `../_data/lessons/${lessonid}/`;
+
 const log = console.log;
 
 // const board = document.querySelector('#board');
@@ -12,26 +16,65 @@ const btnCancel = document.querySelector('#btn-cancel');
 const btnReset  = document.querySelector('#btn-reset');
 const btnReveal = document.querySelector('#btn-reveal');
 
-
-
-const speed = { min: 80, max: 1000}; // DOM slider is normalised value (ie 0-1 float)
-
-const panelGrid = [4, 4];
-// const panelCount = panelGrid.reduce((a, b) => { a * b });
-const panelCount = panelGrid[0] * panelGrid[1];
-// log(panelCount);
-
-
 const imageElm = document.querySelector('.compcard img');
 const textElm = document.querySelector('.compcard p');
 
-imageElm.src = '../_data/lessons/class5_bookb_07/english.svg';
-textElm.textContent = 'English';
+
+const speed = { min: 80, max: 1000}; // DOM slider is normalised value (ie 0-1 float)
+const panelGrid = [4, 3];
+
+
+function buildDeck(data) {
+  const deck = uiElement({ type: 'div', id: 'deck' });
+  
+  const cardChooser = document.querySelector('ul#card-chooser');
+  data.vocab.forEach( item => {
+    const cardThumb = buildCardThumb(item);
+    cardChooser.appendChild(cardThumb);
+  });
+
+}
+
+function buildCardThumb(cardData) {
+  
+  const li = uiElement({ type: 'li', classes: 'card-thumb', data_attrs: { card: cardData.slug } });
+  const img  = uiElement({ type: 'img', attrs: { src: `${mediaPath}${cardData.image}` } });
+  const text = uiElement({ type: 'p', classes: 'text', text: cardData.text });
+
+  li.appendChild(img);
+  li.appendChild(text);
+
+  li.addEventListener('click', chooseCard);
+  
+  return li;
+}
+
+function chooseCard(e) {
+  const cardSlug = e.currentTarget.dataset.card;
+  const cardData = lessonData.data.vocab.find( item => item.slug == cardSlug );
+  // log(cardData);
+
+  imageElm.src = `${mediaPath}${cardData.image}`;
+  textElm.textContent = cardData.text;
+  resetAll();
+}
+
+buildDeck(lessonData.data);
+
+
+
+
+
+
+
+// imageElm.src = '../_data/lessons/class5_bookb_07/english.svg';
+// textElm.textContent = 'English';
 
 // Build Panels
 const panelParent = document.querySelector('#panels');
 panelParent.style = `--cols: ${panelGrid[0]}; --rows: ${panelGrid[1]};`
 
+const panelCount = panelGrid[0] * panelGrid[1];
 for (let i = 0; i < panelCount; i++) {
 
   const panel = uiElement({ type: 'div', classes: 'panel pattern stripes',
@@ -87,7 +130,7 @@ function onPause() {
     btnReveal.toggleAttribute('disabled', true);
   }
 
-  log(panelList)
+  // log(panelList);
 }
 
 
@@ -130,6 +173,10 @@ btnCancel.addEventListener('click', e => {
 
 
 btnReset.addEventListener('click', e => {
+  resetAll();
+});
+
+function resetAll() {
   timer.cancel();
   document.body.classList.remove('reveal');
 
@@ -145,7 +192,9 @@ btnReset.addEventListener('click', e => {
   // Enable play-state buttons
   btnPlay.toggleAttribute('disabled', false);
   btnReveal.toggleAttribute('disabled', false);
-});
+}
+
+
 
 
 btnReveal.addEventListener('click', e => {
