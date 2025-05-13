@@ -18,7 +18,7 @@ const log = console.log;
 const messageBus = messageBusStart();
 messageBus.addEventListener('message', (e) => {
 
-  log('message!', e.data);
+  log('Message from Display window:', e.data);
   
   const msg = e.data;
   switch (msg.type) {
@@ -98,35 +98,22 @@ const btnOpenDisplay = document.querySelector('#btn_open_display');
 btnOpenDisplay.addEventListener('click', openDisplayWindow);
 
 
+//////////////////////////////////
+
 const bgButtons = document.querySelectorAll('.display_bg');
 bgButtons.forEach( b => { b.addEventListener('click', changeDisplayBackground) });
 
-
 function changeDisplayBackground(e) {
-  // const backgroundName = e.currentTarget.dataset.background;
-
-  // messageBus.postMessage({ key: 'changeBackground', val: backgroundName });
-  /*messageBus.postMessage({
-    type: 'display',
-    value: {
-      type: 'background',
-      value: {
-        name: backgroundName,
-        colors: ['#000', '#999']
-      }
-    }
-  });*/
+  e.preventDefault();
   const bgArray = e.currentTarget.dataset.background.split('|');
   const backgroundName   = bgArray[0] || '';
   const backgroundColor1 = bgArray[1] || '7db6e7';
   const backgroundColor2 = bgArray[2] || '79d2f2';
-  // log(bgArray);
 
   messageBus.postMessage({
     type: 'background',
     value: {
       name: backgroundName,
-      // colors: ['#000', '#999']
       colors: [`#${backgroundColor1}`, `#${backgroundColor2}`]
     }
   });

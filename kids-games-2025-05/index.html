@@ -29,31 +29,51 @@
       font-size: 1rem;
       font-weight: normal;
     }
+    
   </style>
 </head>
 <body>
   <div id="wrap">
     <header>
-      <h1>Kids Game Demo</h1>
+      <h1>Kids Game Demos</h1>
       <h2>Base Game System v0.5</h2>
     </header>
-    <button class="btn" id="btn_open_display">Open Display Window</button>
     <ul>
+      <li><a href="./uncover/">Uncover</a></li>
       <li><a href="./flip-find/">Flip &amp; Find</a></li>
       <li><a href="./rotate-stop/">Rotate &amp; Stop</a></li>
       <li><a href="./scan/">Scan</a></li>
       <li><a href="./zoom/">Zoom</a></li>
     </ul>
 
-    <p>
-      <button class="btn display_bg" data-background="">Default</button>
-      <button class="btn display_bg" data-background="usagi|93eaff|fab4df">Usagi</button>
-      <button class="btn display_bg" data-background="dots|96f5c3|a6c7f2">Dots</button>
-      <button class="btn display_bg" data-background="stars|d7c0e8|ffeda2">Stars</button>
-      <button class="btn display_bg" data-background="triangles|86f0d9|b4ffc3">Triangles</button>
-      <button class="btn display_bg" data-background="lines">Lines</button>
-      <button class="btn display_bg" data-background="waves|dfb4fe|d4cfff">Waves</button>
+    <br>
+    <hr>
+
+    <p>Display window demo</p>
+    <button class="btn" id="btn_open_display">Open ↗︎</button>
+    <p id="bg-buttons">
+      Backgrounds:
+      <a href="#" class="display_bg" data-background="">Default</a>
+      <a href="#" class="display_bg" data-background="usagi|93eaff|fab4df">Usagi</a>
+      <a href="#" class="display_bg" data-background="dots|96f5c3|a6c7f2">Dots</a>
+      <a href="#" class="display_bg" data-background="stars|d7c0e8|ffeda2">Stars</a>
+      <a href="#" class="display_bg" data-background="triangles|86f0d9|b4ffc3">Triangles</a>
+      <a href="#" class="display_bg" data-background="lines">Lines</a>
+      <a href="#" class="display_bg" data-background="waves|dfb4fe|d4cfff">Waves</a>
     </p>
+    <p>
+      Key controls:<br>
+      <code style="background: #ccc; padding: 0 0.25em">C</code> = change cursor
+      <br>
+      <code style="background: #ccc; padding: 0 0.25em">E</code> = cursor embiggen
+      <br>
+      <code style="background: #ccc; padding: 0 0.25em">Esc</code> = text mode toggle
+    </p>
+
+    <br>
+    <hr>
+
+    <p>Link to those other card-dragging games I built for another project: <a href="https://neithercorp.com/stage/teaching-games/">Teaching Games</a></p>
   </div>
 </body>
 </html>

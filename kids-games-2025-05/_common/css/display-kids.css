@@ -162,6 +162,10 @@ body {
   overflow: hidden;
   border-radius: 1vw;
 
+  /* box-shadow: 0 0 0 2px var(--card-pattern-color); */
+}
+
+.card .pattern {
   box-shadow: 0 0 0 2px var(--card-pattern-color);
 }
 
