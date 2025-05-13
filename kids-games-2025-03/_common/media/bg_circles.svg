@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <pattern id="diagonal-circles" viewBox="0 0 50 50" height="10" width="10" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="8" fill="#0003"/>
+      <circle cx="35" cy="35" r="8" fill="#0003"/>
+    </pattern>
+  </defs>
+  <rect fill="url(#diagonal-circles)" x="0" y="0" width="100" height="100"/>
+</svg>

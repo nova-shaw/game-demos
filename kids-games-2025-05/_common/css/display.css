@@ -1,0 +1,46 @@
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+main {
+  width: 100%;
+}
+
+/*///////////////////////////////////////////////////////////*/
+/* Controls */
+
+#controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background: #0003;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5em;
+  gap: 0.5em;
+}
+
+#btn-play {
+  width: 5em;
+}
+
+.running #btn-play {
+  background-color: #0fb;
+}
+
+#btn-play .txt-reveal,
+.running #btn-play .txt-start {
+  display: none;
+}
+.running #btn-play .txt-reveal {
+  display: block;
+}
+
+

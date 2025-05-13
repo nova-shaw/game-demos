@@ -1,0 +1,16 @@
+
+@import url('../_common/css/base.css');
+@import url('../_common/css/display.css');
+@import url('../_common/css/display-kids.css');
+
+
+/*///////////////////////////////////////////////////////////*/
+
+.card .face {
+  rotate: y 180deg;
+}
+
+.card.show .sides {
+  rotate: y -180deg;
+  transform-origin: center;
+}

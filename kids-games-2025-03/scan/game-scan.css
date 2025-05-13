@@ -1,0 +1,316 @@
+
+@import url('../_common/css/base.css');
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('../_common/fonts/Nunito-vf-wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-weight: 200 1000;
+}
+
+html {
+  --flipms: 600ms;
+  --shadow: #0002;
+  --card-color: #6ca7ee;
+  /* --card-hover-color: #0ad; */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+main {
+  width: 100%;
+  overflow: hidden; /* temp just to get it working for demo */
+}
+
+#deck {
+
+  font-family: 'Nunito';
+/*  font-variation-settings: "wght" 375;*/
+  font-feature-settings: 'ss01';
+  font-weight: 500;
+
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+  height: 100%;
+
+  padding: 2%;
+  user-select: none;
+}
+
+.card {
+/*  flex: 90% 0 0;*/
+  flex: 40em 0 0; /* temp just to get it working for demo */
+  aspect-ratio: 4/3;
+  margin: 2%;
+  
+/*  border-radius: 5vw;*/
+  border-radius: 4em; /* temp just to get it working for demo */
+
+/*  background: #fff;*/
+  background: #e1f7f0;
+  width: 50%;
+  overflow: hidden;
+
+/*  padding: 3%;*/
+  padding: 2em; /* temp just to get it working for demo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  box-shadow: 0 2vw 1vw -0.5vw var(--shadow);
+
+  /* --zoom-speed: 10s; */
+  --zoom: 1;
+  --poi: 50% 50%;
+}
+
+
+.face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  flex: 100% 1 1;
+  width: 100%;
+  border-radius: 2em;
+  overflow: hidden;
+  padding: 3%;
+}
+
+.face.blank {
+  background: var(--card-color);
+}
+
+
+.card img {
+  flex: 100% 1 1;
+  overflow: hidden;
+  margin: 1vw 0;
+/*  width: 50%;*/
+  width: 16em; /* temp just to get it working for demo */
+  position: relative;
+  z-index: 10;
+/*  opacity: 0.3;*/
+
+  transition: scale var(--zoom-speed) ease-out;
+}
+
+.card .text {
+  margin: 0;
+/*  font-size: 10vw;*/
+  font-size: 4em; /* temp just to get it working for demo */
+  font-weight: bold;
+  translate: 0 20vw;
+  /* transition: translate 500ms ease-in-out; */
+}
+.card .text.show {
+  translate: 0 0;
+  transition: translate 500ms ease-in-out;
+}
+
+.card img {
+  scale: var(--zoom);
+  transition: none;
+  /* transform-origin: 61% 37%; */
+  transform-origin: var(--poi);
+}
+
+
+
+
+
+#controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #0003;
+  padding: 0.5em;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  width: 24em; /*for #scanner - aspect-ratio: 1;*/
+  /*width: 28em;*/ /*for #scanner - aspect-ratio: 4/3;*/
+}
+
+#card-chooser {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+/*  width: 4em;*/
+}
+
+.card-thumb {
+  background: #fff;
+  padding: 0.25em 0.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  cursor: pointer;
+/*  aspect-ratio: 1;*/
+/*  width: 6em;*/
+  overflow: hidden;
+  border-radius: 0.5em;
+}
+
+.card-thumb:hover {
+  outline: 0.5vw solid #000;
+}
+
+.card-thumb * {
+  pointer-events: none;
+  user-select: none;
+}
+
+.card-thumb img {
+  width: 2em;
+  aspect-ratio: 1;
+}
+
+.card-thumb .text {
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  line-height: 1;
+}
+
+#control-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: inherit;
+  user-select: none;
+}
+
+
+
+/*////////// Scanner*/
+
+#scanner {
+  cursor: pointer;
+  background: #fff;
+  background: #fff;
+  flex: 30% 1 1;
+  aspect-ratio: 1;
+/*  aspect-ratio: 4/3;*/
+  border-radius: 0.5em;
+  overflow: hidden;
+  padding: 2em;
+  position: relative;
+}
+
+#scan-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  aspect-ratio: 4/3;
+  width: 3em;
+  border: 3px solid red;
+  pointer-events: none;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  translate: 50% 50%;
+}
+
+#scan-image {
+  pointer-events: none;
+  user-select: none;
+}
+
+
+/*//// SVG Pattern Backgrounds */
+
+#background {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 0;
+/*  --pattern-color1: #8bffe0;*/
+/*  --pattern-color2: #fb93ff;*/
+  --pattern-color1: #8bc2ff;
+  --pattern-color2: #b193ff;
+}
+
+#pattern-background {
+  background: var(--pattern-color1);
+  color: var(--pattern-color2);
+}
+
+
+
+/* //// temp just to get it working for demo */
+
+#btn_correct {
+  min-width: 2em;
+  font-weight: bold;
+  background-color: green;
+  color: #fff;
+}
+#btn_incorrect {
+  min-width: 2em;
+  font-weight: bold;
+  background-color: red;
+  color: #fff;
+}
+
+svg#result-stamp {
+    position: absolute;
+    z-index: 100;
+    /*width: 10em;
+    top: 0;
+    left: 0;*/
+    aspect-ratio: 1;
+/*    background: #0fb;*/
+    width: 20%;
+    top: 50%;
+    left: 50%;
+    translate: 0% -100%;
+    pointer-events: none;
+    scale: 2;
+    opacity: 0.2;
+/*    transition: all 200ms ease-in;*/
+    transition: all 200ms cubic-bezier(0.74, 1.91, 0.56, 0.59);
+}
+
+svg#result-stamp g {
+  display: none;
+}
+[data-result="correct"] svg#result-stamp g#stamp-correct,
+[data-result="incorrect"] svg#result-stamp g#stamp-incorrect {
+  display: block;
+}
+[data-result="correct"] svg#result-stamp,
+[data-result="incorrect"] svg#result-stamp {
+  scale: 1;
+  opacity: 1;
+}

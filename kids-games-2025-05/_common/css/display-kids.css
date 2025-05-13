@@ -1,0 +1,267 @@
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('../fonts/Nunito-vf-wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-weight: 200 1000;
+
+}
+
+html {
+  --flipms: 500ms;
+  --shadow: #0005;
+  --card-color: #0bf;
+
+  
+  --card-pattern-color: #0002;
+  --card-pattern-stripe-width: 0.7vw;
+  
+  --card-pattern-dot-size: 0.35vw;
+  --card-pattern-dot-spacing: 0.747vw;
+  
+  --card-pattern-check-size: 2.2vw;
+  
+  --card-pattern-zigzag-size: 1.075vw;
+}
+
+body {
+  font-family: 'Nunito';
+/*  font-variation-settings: "wght" 375;*/
+  font-feature-settings: 'ss01';
+  font-weight: 500;
+}
+
+
+
+/*///////////////////////////////////////////////////////////*/
+/* Composed Card - ie text + image (jpg/svg/etc) */
+
+.compcard {
+  display: flex;
+
+  background: #fff;
+  aspect-ratio: 4/3;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 3vw;
+  
+  padding: 8vw;
+}
+
+.compcard.single {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2vw;
+}
+
+.compcard img {
+  display: block;
+  max-width: 50%;
+  object-fit: contain;
+  scale: 1;
+}
+
+.compcard p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 10vw;
+}
+
+
+
+/*///////////////////////////////////////////////////////////*/
+/* Card Deck */
+
+#deck {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2%;
+  user-select: none;
+}
+
+/* For 'Uncover' */
+/* .anim-stagger .panel { */
+.reveal .panel {
+  transition-delay: calc(var(--anim-delay) * 30ms);
+}
+
+/* For 'Rotate Stop' and 'Flip find' */
+.anim-stagger .sides {
+  transition-delay: calc(var(--anim-delay) * 100ms);
+}
+
+
+
+
+/*///////////////////////////////////////////////////////////*/
+/* Cards */
+
+.card {
+  flex: 28% 0 0;
+  aspect-ratio: 4/3;
+  margin: 2%;  
+
+  /* Remove `perspective` if you don't want the 3D effect */
+  perspective: 100vw;
+  border-radius: 2vw;
+  cursor: pointer;
+
+}
+
+
+.card .sides {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all var(--flipms) cubic-bezier(0.42, 0.05, 0.26, 1.06);
+}
+
+.card .back,
+.card .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 2vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/*/////////////////////////////////////////////////////////////
+// Card back */
+
+.card .back {
+  background: #0bf;
+  background-color: var(--card-color);
+  box-shadow: 0 1vw 1vw -0.5vw var(--shadow);
+  background-size: 15vw;
+  padding: 1.5vw;
+
+
+}
+
+.pattern {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 1vw;
+
+  box-shadow: 0 0 0 2px var(--card-pattern-color);
+}
+
+.pattern.dots {
+  background-image:
+    radial-gradient(var(--card-pattern-color) var(--card-pattern-dot-size), transparent 0),
+    radial-gradient(var(--card-pattern-color) var(--card-pattern-dot-size), transparent 0);
+  background-size: calc(var(--card-pattern-dot-spacing) * 2) calc(var(--card-pattern-dot-spacing) * 2);
+  background-position: 
+    calc(var(--card-pattern-dot-spacing) *  0.5) calc(var(--card-pattern-dot-spacing) *  0.5),
+    calc(var(--card-pattern-dot-spacing) * -0.5) calc(var(--card-pattern-dot-spacing) * -0.5);
+}
+
+
+.pattern.stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent var(--card-pattern-stripe-width),
+    var(--card-pattern-color) var(--card-pattern-stripe-width),
+    var(--card-pattern-color) calc(var(--card-pattern-stripe-width) * 2)
+  );
+  background-position: 50% 50%;
+}
+
+
+.pattern.check {
+  background-image: repeating-conic-gradient(from 45deg, var(--card-pattern-color) 0% 25%, transparent 0% 50%);
+  background-size: var(--card-pattern-check-size) var(--card-pattern-check-size);
+  background-position: 50% 50%;
+}
+
+
+.pattern.zigzag {
+  background-image:
+    linear-gradient(135deg, var(--card-pattern-color) 25%, transparent 25%) calc( var(--card-pattern-zigzag-size) * -1) 0,
+    linear-gradient(225deg, var(--card-pattern-color) 25%, transparent 25%) calc( var(--card-pattern-zigzag-size) * -1) 0,
+    linear-gradient(315deg, var(--card-pattern-color) 25%, transparent 25%),
+    linear-gradient( 45deg, var(--card-pattern-color) 25%, transparent 25%);
+  background-size:
+    calc(var(--card-pattern-zigzag-size) * 2)
+    calc(var(--card-pattern-zigzag-size) * 2);
+  /* background-position: 50% 50%; */
+}
+
+
+/*/////////////////////////////////////////////////////////////
+// Card face */
+
+.card .face {
+  z-index: 10;
+  /* rotate: y 180deg; */
+  box-shadow: 0 2vw 2vw -0.5vw var(--shadow);
+  background: #fff;
+  padding: 1vw;
+  pointer-events: none;
+}
+
+.card .face img {
+  flex: 100% 1 1;
+  overflow: hidden;
+  margin: 1vw 0;
+}
+
+.card .face p {
+  margin: 0;
+  font-size: 1.25em;
+  font-size: 2.75vw;
+  font-weight: bold;
+}
+
+.card.focus .face,
+.card.focus .back,
+.card:hover .face,
+.card:hover .back {
+  outline: 0.5vw solid #000;
+}
+
+.card.show {
+  position: relative;
+  z-index: 10;
+}
+
+
+
+/*///////////////////////////////////////////////////////////*/
+/* SVG Pattern Backgrounds */
+
+#background {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 0;
+  --pattern-color1: #b3e9ff;
+  --pattern-color2: #ffff93;
+}
+
+#pattern-background {
+  background: var(--pattern-color1);
+  color: var(--pattern-color2);
+}
