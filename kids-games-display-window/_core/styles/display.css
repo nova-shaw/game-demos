@@ -1,0 +1,410 @@
+
+@import url('./base.css');
+@import url('./display-card.css');
+
+
+body {
+  background: #000;
+  --pattern-color1: #7db6e7;
+  --pattern-color2: #79d2f2;
+  overflow: hidden;
+
+  /* allow dragging on touch screen without pull-down-to-refreshing */ 
+  touch-action: none;
+
+  /**
+   * Aspect ratio & element sizing
+   * 
+   * These are set separately as the 2 different calculations are used for different pusposes:
+   * --aspect-normal: (eg 16/9) for font/element sizing
+   * --aspect-invert: (eg 9/16) for #aspect-guide element
+   * 
+   * Thanks for propotional font sizing idea: https://stackoverflow.com/a/68706388
+   *  */
+
+  --aspect-w: 16;
+  --aspect-h: 9;
+
+  --aspect-normal: calc( var(--aspect-w) / var(--aspect-h) );
+  --aspect-invert: calc( var(--aspect-h) / var(--aspect-w) );
+  
+  /* font-size: min(2vw, calc( var(--aspect-normal) * 2vh) ); */
+  --factor: 3.5;
+  font-size: min(
+    calc(1vw * var(--factor)),
+    calc( calc(1vh * var(--factor)) * var(--aspect-normal) )
+  );
+}
+
+/*///////////////////////////////////////////////////////////*/
+/* Controls */
+
+main {
+  width: 100%;
+}
+
+#deck {
+  width: 100%;
+}
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////*/
+
+
+/*//////////////////////////////////////////////////////////////////////////////*/
+
+
+
+
+/*////////////////////////////////// SVG */
+
+
+#background {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  /* z-index: -1; */
+  background: var(--pattern-color1);
+}
+
+#svg-patterns {
+  color: var(--pattern-color2);
+}
+
+#background-logo {
+  width: 50%;
+  width: 13em;
+  height: auto;
+  /* display: none; */
+  color: var(--pattern-color2);
+}
+
+#background-pattern {
+  background: var(--pattern-color1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* display: none; */
+}
+
+#cursor.large  #cursor-svg {
+  scale: 1.75;
+}
+
+#cursor.mirror #cursor-svg {
+  transform: scale(-1, 1);
+}
+
+
+/*////////////////////////////////// Media Display elements */
+
+#display {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background: #999; */
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.display-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fit: contain; */
+  object-fit: cover;
+  /* pointer-events: none; */
+  /* user-select: none; */
+  display: none;
+}
+
+body[data-display='image'] #image-frame,
+body[data-display='audio+image'] #image-frame,
+body[data-display='video'] #video-frame,
+body[data-display='build'] #build-frame {
+  /* display: block; */
+  display: flex;
+}
+
+#image-frame { background: #000; user-select: none; }
+#video-frame { background: #000; }
+#audio-frame { background: #000; }
+#build-frame {
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4%;
+  gap: 4%;
+}
+
+
+/*////////////////////////////////// Background */
+
+body[data-background=""] svg#background-pattern {
+  display: none;
+}
+
+/* Hide all backgrounds if media being displayed */
+/* body[data-display] svg#background-default,
+body[data-display] svg#background-pattern {
+  display: none;
+} */
+
+
+/*////////////////////////////////// Overlay? */
+
+#overlay {
+  /* background: #0004; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  /* pointer-events: none; */
+  /* font-size: 1rem; */
+}
+
+/*////////////////////////////////// Custom Cursor */
+
+#cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+}
+
+#cursor-svg {
+  /* //// DO we want the cursor to resize with window? */
+  /* //// Created at 80px square */
+  /* width: 80px; */
+  /* width: 5em; */
+  /* width: 4em; */
+  width: clamp(80px, 4em, 160px);
+  transform-origin: 4px 4px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.4));
+  translate: -4px -4px;
+}
+
+.hide-mouse {
+  cursor: none;
+}
+
+.show-cursor #cursor {
+  opacity: 1;
+}
+
+
+
+#cursor p {
+  margin: 0;
+  font-size: 2em;
+  position: absolute;
+  bottom: 95%;
+  left: -10%;
+  z-index: 1;
+  width: 10em;
+  display: none;
+}
+
+/* #cursor.text-mode p { */
+body.cursor-text-mode #cursor p {
+  display: block;
+}
+
+#cursor p span#cursor-text {
+  pointer-events: all;
+  display: inline-block;
+  background: #fff;
+  color: inherit;
+  padding: 0.15em 0.25em;
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+#cursor p span#cursor-text:focus {
+  outline: none;
+}
+
+
+/*////////////////////////////////// Loader */
+
+/* Thanks https://codepen.io/supah/pen/BjYLdW */
+
+#loader {
+  width: 2em;
+  width: clamp(1em, 10%, 2em);
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  aspect-ratio: 1;
+/*  stroke-width: 3px;*/
+/*  color: #fff;*/
+  display: none;
+}
+
+.loading #loader {
+  display: block;
+}
+
+#loader-svg {
+  animation: rotate 1.3s linear infinite;
+  display: block;
+  overflow: visible;
+}
+
+#loader-svg-circle {
+  animation: dash 2s cubic-bezier(0.3, 0, 0.7, 1) infinite;
+  stroke-width: 6px;
+  stroke: #fff;
+}
+
+
+@keyframes dash {
+  0%   { stroke-dasharray: 1,  150; stroke-dashoffset: 0    }
+  50%  { stroke-dasharray: 90, 150; stroke-dashoffset: -35  }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124 }
+}
+
+
+
+/*////////////////////////////////// Click catcher */
+
+#clickcatcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* background: #0004; */
+  /* z-index: 100; */
+  pointer-events: all;
+}
+
+.ripple {
+  width: 1vw;
+  aspect-ratio: 1;
+  /* background: #000; */
+  border-radius: 50%;
+  position: absolute;
+  translate: -50% -50%;
+  /* box-shadow: 0 0 0 1px #fff; */
+  box-shadow: 0 0 0 1px #c5e6ff;
+  mix-blend-mode: screen;
+
+  animation:
+    scale 800ms linear,
+    fade 1000ms linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scale {
+  0%   { scale: 1 }
+  100% { scale: 6 }
+}
+
+@keyframes fade {
+  0% { opacity: 1 }
+  50% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+
+/*////////////////////////////////// Frame Guide */
+
+#aspect-guide {
+  color: #fff;
+  background: #0001;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  
+  width: 100vw;
+  max-width: calc(100vh / var(--aspect-invert));
+  height: 100vh;
+  max-height: calc(100vw * var(--aspect-invert));
+
+
+  --inset: 1em;
+  --corner: 2rem;
+  
+  opacity: 0;
+  transition: opacity 300ms linear;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  padding: var(--inset);
+
+
+}
+#aspect-guide #corners {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  box-shadow: inset 0 0 0 3px;
+  z-index: 1;
+
+
+  clip-path: polygon(
+    0 0,
+    var(--corner) 0, var(--corner) var(--inset), calc(100% - var(--corner)) var(--inset), calc(100% - var(--corner)) 0,
+    100% 0, 100% var(--corner), calc(100% - var(--inset)) var(--corner), calc(100% - var(--inset)) calc(100% - var(--corner)), 100% calc(100% - var(--corner)), 100% 100%,
+    calc(100% - var(--corner)) 100%, calc(100% - var(--corner)) calc(100% - var(--inset)), var(--corner) calc(100% - var(--inset)), var(--corner) 100%,
+    0 100%, 0 calc(100% - var(--corner)), var(--inset) calc(100% - var(--corner)), var(--inset) var(--corner), 0 var(--corner), 0 0
+  );
+}
+
+.show-aspect-guide #aspect-guide {
+  opacity: 1;
+  transition: none;
+}
+
+#aspect-guide p {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+/* #aspect-guide p#resize-text-relative { font-size: 1em } */
+#aspect-guide #resize-text-absolute { font-size: 1rem }

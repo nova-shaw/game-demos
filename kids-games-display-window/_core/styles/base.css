@@ -1,0 +1,196 @@
+
+*, *::before, *::after { box-sizing: border-box }
+
+body {
+  font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Helvetica, Arial, apple color emoji, segoe ui emoji, segoe ui symbol, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100dvh;
+  touch-action: none; /* allow dragging on touch screen without pull-down-to-refreshing */
+
+  --bg: #eee;
+  --text: #000;
+
+  background: var(--bg);
+  color: var(--text);
+
+  --light-blue: #8ccef7;
+
+}
+
+/*/////////////////////// Base */
+
+a {
+  color: inherit;
+}
+
+h1 {
+  font-size: 1.2rem;
+/*  margin: 0 0.25rem;*/
+  margin: 0;
+}
+
+h2, h3 {
+  font-size: 1rem;
+  /* font-weight: normal; */
+  /* margin: 0 0.25rem; */
+  margin: 0.25rem 0;
+}
+
+img {
+  display: block;
+  margin: 0;
+  max-width: 100%;
+}
+
+figure {
+  margin: 0;
+}
+
+
+/*/////////////////////// SVGs */
+
+svg {
+  display: block;
+  background: transparent;
+
+  fill-rule: evenodd;
+  clip-rule: evenodd;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 1.5;
+
+  overflow: visible;
+  color: inherit;
+}
+
+svg .stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+}
+
+svg .fill {
+  fill: currentColor;
+}
+
+svg .fill.bg {
+  fill: var(--bg);
+}
+svg .stroke.bg {
+  stroke: var(--bg);
+}
+
+
+/*/////////////////////// Inputs */
+
+input {}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  /* border-radius: 1rem; */
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 3px;
+  width: 100%;
+}
+
+input[type='range']::-moz-range-track {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 3px;
+  width: 100%;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  background: #000;
+  width: 1rem;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+}
+
+input[type='range']::-moz-range-thumb {
+  appearance: none;
+  border: none;
+  background: #000;
+  width: 1rem;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+}
+
+
+/*/////////////////////// Buttons */
+
+button {
+  appearance: none;
+  border: none;
+  font: inherit;
+  line-height: inherit;
+  background: transparent;
+  user-select: none;
+  cursor: pointer;
+}
+
+button[disabled] {
+  cursor: default;
+}
+
+.btn {
+  background: #fff;
+  border-radius: 0.25em;
+
+  height: 1.75em;
+  min-width: 1.75em;
+  line-height: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.btn.icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn.icon svg {
+  width: 1.5em;
+}
+
+.btn.icon .icon-play,
+.btn.icon .icon-pause {
+  display: block;
+}
+.btn.icon .icon-pause,
+.playing .btn.icon .icon-play {
+  display: none;
+}
+.playing .btn.icon .icon-pause {
+  display: block;
+}
+
+
+/*/////////////////////// Animations */
+
+@keyframes rotate {
+  100% { transform: rotate(360deg) }
+}

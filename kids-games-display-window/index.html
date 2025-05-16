@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Games in Display Window</title>
+  <script src="./index.js" type="module"></script>
+  <link href="./_core/styles/resources.css" rel="stylesheet" type="text/css">
+</head>
+<body data-display="closed">
+  <div id="wrap">
+
+    <button class="btn" id="btn-open-display">
+      Open Display ↗︎
+      <!-- <span class="txt-open">Open Display ↗︎</span> -->
+      <!-- <span class="txt-close">Close Display &times;</span> -->
+      <!-- <span class="txt-close">Close Display ↙︎</span> -->
+    </button>
+
+    <button id="show-card">Card ↗︎</button>
+
+    <ul>
+      <li><a href="./uncover/">Uncover</a></li>
+      <li><a href="./flip-find/">Flip &amp; Find</a></li>
+      <li><a href="./rotate-stop/">Rotate &amp; Stop</a></li>
+      <li><a href="./scan/">Scan</a></li>
+      <li><a href="./zoom/">Zoom</a></li>
+    </ul>
+
+    <p id="bg-buttons">
+      Backgrounds:
+      <a href="#" class="display_bg" data-background="">Default</a>
+      <a href="#" class="display_bg" data-background="usagi|93eaff|fab4df">Usagi</a>
+      <a href="#" class="display_bg" data-background="dots|96f5c3|a6c7f2">Dots</a>
+      <a href="#" class="display_bg" data-background="stars|d7c0e8|ffeda2">Stars</a>
+      <a href="#" class="display_bg" data-background="triangles|86f0d9|b4ffc3">Triangles</a>
+      <a href="#" class="display_bg" data-background="lines">Lines</a>
+      <a href="#" class="display_bg" data-background="waves|dfb4fe|d4cfff">Waves</a>
+    </p>
+  </div>
+
+</body>
+</html>

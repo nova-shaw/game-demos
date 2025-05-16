@@ -1,0 +1,32 @@
+
+@import url('./base.css');
+
+#wrap {
+  max-width: 36rem;
+  padding: 2rem;
+}
+
+#btn-open-display {
+  opacity: 0.4;
+  /* pointer-events: none; */
+}
+
+[data-display='closed'] #btn-open-display {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.display-is-open #btn-open-display {
+
+  /* background: #0fb; */
+}
+/* 
+#btn-open-display .txt-close,
+.display-is-open #btn-open-display .txt-open {
+  display: none;
+}
+
+.display-is-open #btn-open-display .txt-close {
+  display: block;
+}
+ */
