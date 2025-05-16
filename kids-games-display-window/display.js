@@ -66,7 +66,7 @@ const c2 = build.card({
 });
 
 buildFrame.appendChild(c1);
-// buildFrame.appendChild(c2);
+buildFrame.appendChild(c2);
 
 
 

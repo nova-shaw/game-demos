@@ -28,6 +28,9 @@
   flex-direction: row;
 
   /* animation: tempresize 10s ease-in-out infinite; */
+
+  container-name: card;
+  container-type: inline-size;
 }
 
 .card .sides {
@@ -49,15 +52,17 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
   /* box-shadow: 0 1em 1em -0.5em #0003; */
 }
 
 .card .face {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
   font-family: 'Nunito';
   z-index: 10;
   /* rotate: y 180deg; */
@@ -74,24 +79,25 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 1em;
+
+  margin: 4cqw;
+  gap: 4cqw;
+  flex: 40% 0 1;
+
+
+  container-name: group;
+  container-type: inline-size;
 }
 
 .card .face img {
-  /* flex: 100% 1 1; */
-  /* overflow: hidden; */
-  /* margin: 1vw 0; */
-  /* width: 7em; */
-  width: 16cqw;
-  height: 16cqw;
-  /* aspect-ratio: 1; */
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
 }
 
 .card .face p {
   margin: 0;
-  /* font-size: 1.25em; */
-  /* font-size: 2.25em; */
-  font-size: 5cqw;
+  font-size: 30cqw;
   line-height: 1;
   font-weight: 700;
 }
@@ -106,20 +112,4 @@
 .card.show {
   position: relative;
   z-index: 10;
-}
-
-
-@keyframes tempresize_w {
-  50% { width: 2em }
-  100% { width: 18em }
-}
-
-@keyframes tempresize_f {
-  50% { font-size: 0.25em }
-  100% { font-size: 1em }
-}
-
-@keyframes tempresize {
-  50% {  scale: 0.1 }
-  100% { scale: 1 }
 }
