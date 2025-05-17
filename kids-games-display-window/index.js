@@ -1,7 +1,10 @@
 
 import { popWindow, messageBusStart } from './_core/modules/window.js';
 import * as win from './_core/modules/window.js';
-// import * as build from   './_core/modules/display-builder.js';
+
+import * as fetcher from  './_core/modules/build-fetcher.js';
+
+import * as build from   './_core/modules/build.js';
 
 const log = console.log;
 
@@ -10,6 +13,12 @@ let displayWindowRef = null; // Only useful as long as this (parent) page isn't 
 
 
 
+
+const p = await fetcher.all(['_data/kids-phonics-single.json']);
+// log(p);
+p.forEach( set => {
+  log(set);
+});
 
 
 

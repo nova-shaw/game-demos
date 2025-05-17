@@ -1,6 +1,5 @@
 
-import { uiElement } from './_core/modules/build-uielement.js';
-import * as build from   './_core/modules/build-card.js';
+import * as build from    './_core/modules/build.js';
 import * as win from      './_core/modules/window.js';
 import * as cursor from   './_core/modules/display-cursor.js';
 import * as keypress from './_core/modules/display-keypress.js';
@@ -68,7 +67,7 @@ const c2 = build.card({
 const c3 = build.card({
   content: {
     items: [
-      { "text": "O o", "image": "octopus.svg" },
+      { "text": "Z z", "image": "octopus.svg" },
       { "text": "N n", "image": "nut.svg" },
       { "text": "R r", "image": "red.svg" }
     ],
@@ -442,7 +441,7 @@ clickCatcher.addEventListener('pointerdown', e => {
 });
 
 function showClick(coords) {
-  const ripple = uiElement({ type: 'div', classes: 'ripple' });
+  const ripple = build.elm({ type: 'div', classes: 'ripple' });
   // ripple.style = `left: ${coords.x}%; top: ${coords.y}%`;
   ripple.style = `left: ${coords.x}px; top: ${coords.y}px`;
   clickCatcher.appendChild(ripple);
