@@ -1,9 +1,9 @@
 
 import { uiElement } from './_core/modules/build-uielement.js';
+import * as build from   './_core/modules/build-card.js';
 import * as win from      './_core/modules/window.js';
 import * as cursor from   './_core/modules/display-cursor.js';
 import * as keypress from './_core/modules/display-keypress.js';
-import * as build from   './_core/modules/display-builder.js';
 
 const log = console.log, dir = console.dir;
 
@@ -65,8 +65,20 @@ const c2 = build.card({
   flippable: true
 });
 
-buildFrame.appendChild(c1);
-buildFrame.appendChild(c2);
+const c3 = build.card({
+  content: {
+    items: [
+      { "text": "O o", "image": "octopus.svg" },
+      { "text": "N n", "image": "nut.svg" },
+      { "text": "R r", "image": "red.svg" }
+    ],
+    mediapath: '../../../MM-dev-MEDIA/kids-phonics/phonics-set2/'
+  }
+});
+
+// buildFrame.appendChild(c1);
+// buildFrame.appendChild(c2);
+buildFrame.appendChild(c3);
 
 
 
