@@ -35,7 +35,7 @@ const videoPath = '../display-window-content-not-synced/media/video/';
 
 //////////////////////////////////////////////////
 // Temp
-
+/*
 const c1 = build.card({
   content: {
     items: [
@@ -71,13 +71,14 @@ const c3 = build.card({
       { "text": "N n", "image": "nut.svg" },
       { "text": "R r", "image": "red.svg" }
     ],
-    mediapath: '../../../MM-dev-MEDIA/kids-phonics/phonics-set2/'
+    mediapath: '../../../MM-dev-MEDIA/kids-phonics/phonics-setb/'
   }
 });
+*/
 
 // buildFrame.appendChild(c1);
 // buildFrame.appendChild(c2);
-buildFrame.appendChild(c3);
+// buildFrame.appendChild(c3);
 
 
 
@@ -126,8 +127,24 @@ function messageBusReceive(event) {
     case 'confirm': confirmDisplayOpen(); break;
     case 'display': displayMedia(msg.value); break;
     case 'bground': changeBackground(msg.value); break;
+    case 'phonicscard': buildPhonicsCard(msg.value); break;
     case 'control': controlDispatch(msg.value); break;
   }
+}
+
+function buildPhonicsCard(data) {
+  log(data)
+  const card = build.card({
+    content: {
+      items: [
+        { "text": data.text, "image": data.file }
+      ],
+      mediapath: `../../../MM-dev-MEDIA/kids-phonics/phonics-set${data.set}/`
+    }
+  });
+
+  while (buildFrame.firstChild) { buildFrame.removeChild(buildFrame.lastChild) }
+  buildFrame.appendChild(card);
 }
 
 

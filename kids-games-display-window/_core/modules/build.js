@@ -9,25 +9,20 @@ export function elm({ // These are 'simulated' named paramers (with defaults) - 
   href       = null,
   id         = null,
   classes    = null,
+  text       = null,
+  src        = null,
   attrs      = null,
   data_attrs = null,
-  text       = null,
   html       = null } = {})
 {
 
   const element = document.createElement(type);
 
-  if (href) {
-    element.href = href;
-  }
-
-  if (id) {
-    element.setAttribute('id', id);
-  }
-  
-  if (classes) {
-    element.classList = classes;
-  }
+  if (href) { element.href = href; }
+  if (id) { element.setAttribute('id', id); }
+  if (classes) { element.classList = classes; }
+  if (text) { element.textContent = text; }
+  if (src) { element.src = src; }
 
   if (attrs) {
     for (const key in attrs) {
@@ -41,15 +36,15 @@ export function elm({ // These are 'simulated' named paramers (with defaults) - 
     }
   }
 
-  if (text) {
-    element.textContent = text;
-  }
-
-  if (html) { //// This is dangerous to provide, but allows basic formatting such as <b> and <i> to be kept in the JSON
-    element.innerHTML = html;
-  }
+  //// This is dangerous to provide, but allows basic formatting such as <b> and <i> to be kept in the JSON
+  if (html) { element.innerHTML = html; }
 
   return element;
+}
+
+
+export function txt(string) {
+  return document.createTextNode(string);
 }
 
 

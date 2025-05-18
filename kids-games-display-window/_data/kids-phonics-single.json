@@ -1,5 +1,5 @@
 {
-  "set1": [
+  "a": [
     { "letter": "a", "word": "apple",     "file": "apple.svg" },
     { "letter": "b", "word": "bat",       "file": "bat.svg" },
     { "letter": "c", "word": "cup",       "file": "cup.svg" },
@@ -27,7 +27,7 @@
     { "letter": "y", "word": "yak",       "file": "yak.svg" },
     { "letter": "z", "word": "zip",       "file": "zip.svg" }
   ],
-  "set2": [
+  "b": [
     { "letter": "a", "word": "ant",       "file": "ant.svg" },
     { "letter": "b", "word": "bag",       "file": "bag.svg" },
     { "letter": "c", "word": "cat",       "file": "cat.svg" },
@@ -55,7 +55,7 @@
     { "letter": "y", "word": "yam",       "file": "yam.svg" },
     { "letter": "z", "word": "zigzag",    "file": "zigzag.svg" }
   ],
-  "set3": [
+  "c": [
     { "letter": "a", "word": "alligator", "file": "alligator.svg" },
     { "letter": "b", "word": "bus",       "file": "bus.svg" },
     { "letter": "c", "word": "cap",       "file": "cap.svg" },

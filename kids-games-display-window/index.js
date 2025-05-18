@@ -15,10 +15,76 @@ let displayWindowRef = null; // Only useful as long as this (parent) page isn't 
 
 
 const p = await fetcher.all(['_data/kids-phonics-single.json']);
-// log(p);
-p.forEach( set => {
+// log(p[0]);
+// const p0 = p[0];
+
+// log(Object.entries(p[0]));
+
+
+/*p.forEach( set => {
   log(set);
-});
+  set.forEach( letter => {
+    log(letter)
+  });
+});*/
+
+const phonicsList = build.elm({ type: 'div', id: 'phonicslist' });
+
+for (const setID in p[0]) {
+  const setGroup = build.elm({ type: 'div', id: `set-${setID}`, classes: 'group' });
+  const setTitle = build.elm({ type: 'h3', text: `Set ${setID.toUpperCase()}` });
+  setGroup.appendChild(setTitle);
+
+  const setList = build.elm({ type: 'ul' });
+
+  // log(setID);
+  p[0][setID].forEach( letter => {
+    // log(setID, letter);
+    const li   = build.elm({ type: 'li' });
+    // const link = build.elm({ type: 'a', text: letter.word, href: `phonics-set${setID}-${letter.letter}` });
+    const link = build.elm({ type: 'a',
+      href: `phonics-set${setID}-${letter.letter}`,
+      data_attrs: {
+        'set': setID,
+        'letter': letter.letter,
+        'file': letter.file,
+        'word': letter.word
+      }
+    });
+    const txt  = build.txt( letter.word );
+    const img  = build.elm({ type: 'img', attrs: { 'src': `../../../MM-dev-MEDIA/kids-phonics/phonics-set${setID}/${letter.file}` } });
+
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const data = {
+        set: e.currentTarget.dataset.set,
+        file: e.currentTarget.dataset.file,
+        // text: `${e.currentTarget.dataset.letter.toUpperCase()} ${e.currentTarget.dataset.letter}`
+        text: e.currentTarget.dataset.word
+      }
+      messageBus.postMessage({ type: 'phonicscard', value: data });
+    });
+
+    link.appendChild(img);
+    link.appendChild(txt);
+    li.appendChild(link);
+    setList.appendChild(li);
+  });
+
+  setGroup.appendChild(setList);
+  phonicsList.appendChild(setGroup);
+}
+
+document.body.appendChild(phonicsList);
+
+/*for (const [key, value] of Object.entries(p0)) {
+  log(`${key}: ${p0.value}`);
+  // log(`${key}: ${p[0].value}`);
+  // log(`${p[0].key}: ${p[0].value}`);
+  p0[key].forEach( letter => {
+    log(key, letter);
+  })
+}*/
 
 
 

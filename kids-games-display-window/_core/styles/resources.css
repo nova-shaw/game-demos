@@ -30,3 +30,38 @@
   display: block;
 }
  */
+
+
+
+/* TEMP: */
+
+#phonicslist {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* width: 100%; */
+  padding: 2vw;
+}
+
+#phonicslist .group {
+  margin: 0 2vw;
+}
+
+#phonicslist ul {
+  padding: 0;
+  list-style: none;
+}
+
+#phonicslist a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+}
+
+#phonicslist img {
+  width: 2em;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 0.25em;
+}
