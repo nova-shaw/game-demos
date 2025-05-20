@@ -14,8 +14,20 @@ let displayWindowRef = null; // Only useful as long as this (parent) page isn't 
 
 
 
-const p = await fetcher.all(['_data/kids-phonics-single.json']);
-// log(p[0]);
+const p = await fetcher.all([
+  '_data/kids-phonics-single.json',
+  '_data/kids-5b07.json'
+]);
+log(p[1]);
+
+let prevLesson;
+const currentLesson = p[1];
+if (currentLesson.meta.number > 1) {
+  log('review!');
+  prevLesson = await fetcher.all([`_data/kids-5b${String(currentLesson.meta.number - 1).padStart(2, '0')}.json`]);
+  log(prevLesson);
+}
+
 // const p0 = p[0];
 
 // log(Object.entries(p[0]));

@@ -1,0 +1,49 @@
+
+{
+  "id": "5b-06",
+  "meta": {
+    "course": "kids",
+    "level": "class5",
+    "level_old": "2B",
+    "book": "b",
+    "number": 6,
+    "title": "I can play the (guitar).",
+    "mediafolder": "c5b-06"
+  },
+  "bquestions": [10, 4],
+  "mainimage": "2b06-D01.jpg",
+  "target": [
+    "I can play the (guitar).",
+    "Really? That's cool"
+  ],
+  "dialogue": [
+    [ "hiroto", "Can you play the didgeridoo?" ],
+    [ "mark",   "No, I can't, but I can play the guitar." ],
+    [ "hiroto", "Really? That's cool." ]
+  ],
+  "vocab": [
+    { "text": "didgeridoo", "slug": "didgeridoo", "poi": null, "image": null },
+    { "text": "drums",      "slug": "drums",      "poi": null, "image": null },
+    { "text": "guitar",     "slug": "guitar",     "poi": null, "image": null },
+    { "text": "piano",      "slug": "piano",      "poi": null, "image": null },
+    { "text": "recorder",   "slug": "recorder",   "poi": null, "image": null }
+  ],
+  "listening": null,
+
+  "phonics": {
+    "cards": [
+      { "letter": "d", "word": "dog" },
+      { "letter": "p", "word": "pig" }
+    ],
+    "quiz": [
+      "p, i, p, i, pi",
+      "d, i, d, i, di",
+      "i, p, i, i, ip"
+    ]
+  }
+}
+
+
+
+
+
