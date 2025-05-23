@@ -30,7 +30,22 @@
   ],
   "listening": null,
 
-  "phonics": {
+  "phonics": { "set_a": ["d", "p"] },
+
+  "phonics_quiz": {
+    "puzzle": ["pi", "di", "ip", "id"],
+    "say": [
+      "p, i, p, i, pi",
+      "d, i, d, i, di",
+      "i, p, i, p, ip",
+      "i, d, i, d, id"
+    ]
+  },
+
+
+
+
+  "phonics_OLD_STRUCTURE_1": {
     "cards": [
       { "letter": "d", "word": "dog" },
       { "letter": "p", "word": "pig" }
@@ -40,6 +55,11 @@
       "d, i, d, i, di",
       "i, p, i, i, ip"
     ]
+  },
+
+  "phonics_OLD_STRUCTURE_2": {
+    "set": "a",
+    "letters": ["d", "p"]
   }
 }
 
